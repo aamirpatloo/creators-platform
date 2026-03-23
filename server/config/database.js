@@ -1,0 +1,22 @@
+import { config } from 'dotenv';
+import mongoose from 'mongoose';
+
+config(); // Load environment variables from .env file
+
+
+const connectDB = async () => {
+  try {
+    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/creators-platform';
+    
+    await mongoose.connect(mongoURI);
+    
+    console.log('✅ MongoDB connected successfully');
+    
+  } catch (error) {
+    console.error('❌ MongoDB connection failed:', error.message);
+    process.exit(1); // Exit the application if database connection fails
+  }
+};
+
+export default connectDB;
+// database connection to MongoDB
